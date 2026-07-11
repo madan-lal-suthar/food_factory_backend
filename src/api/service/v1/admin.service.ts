@@ -2,7 +2,7 @@ import appConstants from "../../common/appConstants";
 import CryptoService from "../../helper/crypto.helper";
 import jwtHelper from "../../helper/jwt.helper";
 import { Request, Response } from 'express';
-import model from "../../model/Blogs" 
+// import model from "../../model/Blogs" 
 
 class AdminService {
     static async RegisterAdmin(request : Request, response : Response) {

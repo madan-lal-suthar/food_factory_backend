@@ -1,5 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const LocalizationKeys = {
-    VALIDATE_FIELD_REQUIRED : "VALIDATE_FIELD_REQUIRED",
+    VALIDATE_FIELD_REQUIRED: "VALIDATE_FIELD_REQUIRED",
     EMAIL_REQUIRED: "EMAIL_REQUIRED",
     PASSWORD_REQUIRED: "PASSWORD_REQUIRED",
     REGISTRATION_SUCCESSFULLY_MSG: "REGISTRATION_SUCCESSFULLY_MSG",
@@ -35,7 +37,5 @@ const LocalizationKeys = {
     INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
     INVALID_OTP_OR_EXPIRED: "INVALID_OTP_OR_EXPIRED",
     GENERAL_ERROR: "GENERAL_ERROR"
-  };
-  
-  export default LocalizationKeys;
-  
+};
+exports.default = LocalizationKeys;

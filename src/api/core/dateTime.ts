@@ -1,66 +1,68 @@
 class DateTime {
-  constructor(initialDate = new Date()) {
+  date: Date;
+
+  constructor(initialDate: Date = new Date()) {
     this.date = new Date(initialDate); // Initialize with the provided date or current date
   }
 
   // Static method to return a new DateTime instance for the current date
-  static now() {
+  static now(): DateTime {
     return new DateTime();
   }
 
   // Method to add minutes
-  addMinutes(minutes) {
+  addMinutes(minutes: number): this {
     this.date.setMinutes(this.date.getMinutes() + minutes);
     return this; // Return the instance for chaining
   }
 
   // Method to add seconds
-  addSeconds(seconds) {
+  addSeconds(seconds: number): this {
     this.date.setSeconds(this.date.getSeconds() + seconds);
     return this; // Return the instance for chaining
   }
 
   // Method to add month
-  addMonth(month) {
+  addMonth(month: number): this {
     this.date.setMonth(this.date.getMonth() + month);
     return this; // Return the instance for chaining
   }
 
   // Method to add years
-  addYears(years) {
+  addYears(years: number): this {
     this.date.setFullYear(this.date.getFullYear() + years);
     return this; // Return the instance for chaining
   }
 
   // Method to add milliseconds
-  addMilliseconds(milliseconds) {
+  addMilliseconds(milliseconds: number): this {
     this.date.setTime(this.date.getTime() + milliseconds);
     return this; // Return the instance for chaining
   }
 
   // Get the current date as a formatted string
-  toString() {
+  toString(): string {
     return this.date.toISOString();
   }
 
   // Get the raw Date object
-  getDate() {
+  getDate(): Date {
     return this.date;
   }
 
   // Get the milliseconds since epoch
-  get millisecondsSinceEpoch() {
+  get millisecondsSinceEpoch(): number {
     return this.date.getTime();
   }
 
   // Method to get current time in IST (UTC +5:30) in milliseconds
-  getIstTimeMilliseconds() {
+  getIstTimeMilliseconds(): number {
     const istOffset = 5.5 * 60 * 60 * 1000; // 5 hours 30 minutes in milliseconds
     const istTimeInMillis = this.date.getTime() + istOffset;
     return istTimeInMillis;
   }
 
-  readable_ts() {
+  readable_ts(): string {
     const now = this.date;
 
     // Get month names
@@ -85,7 +87,7 @@ class DateTime {
     const year = now.getFullYear();
 
     // Add suffix for the day
-    const dateSuffix = (date) => {
+    const dateSuffix = (date: number): string => {
       if (date % 10 === 1 && date !== 11) return `${date}st`;
       if (date % 10 === 2 && date !== 12) return `${date}nd`;
       if (date % 10 === 3 && date !== 13) return `${date}rd`;
@@ -104,7 +106,7 @@ class DateTime {
     return `${formattedDate} at ${formattedTime}`;
   }
 
-  isAdult() {
+  isAdult(): boolean {
     const birthDate = this.date;
     const today = new Date(); // Get current date
 
@@ -121,8 +123,8 @@ class DateTime {
     return age >= 18; // Return true if 18 or older, false otherwise
   }
 
-  static formatDateRange(start, end) {
-    const parseDate = (dateStr) => new Date(dateStr);
+  static formatDateRange(start: string, end: string): string {
+    const parseDate = (dateStr: string): Date => new Date(dateStr);
 
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
