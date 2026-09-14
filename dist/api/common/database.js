@@ -5,7 +5,7 @@ exports.connectDB = connectDB;
 const sequelize_1 = require("sequelize");
 Object.defineProperty(exports, "Sequelize", { enumerable: true, get: function () { return sequelize_1.Sequelize; } });
 Object.defineProperty(exports, "DataTypes", { enumerable: true, get: function () { return sequelize_1.DataTypes; } });
-const POSTGRES_URL = "postgres://postgres:manager@localhost:5432/FoodFactory";
+const POSTGRES_URL = "postgres://postgres:manager@postgres-db:5432/FoodFactory";
 const sequelize = new sequelize_1.Sequelize(POSTGRES_URL);
 exports.sequelize = sequelize;
 async function connectDB() {

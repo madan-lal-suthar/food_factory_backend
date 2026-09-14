@@ -1,4 +1,6 @@
 module.exports = {
-  success: (res, data, status = 200) => res.status(status).json({ success: true, data }),
-  error: (res, message, status = 400) => res.status(status).json({ success: false, message }),
+  success: (res, data, message = 'Success', status = 200) =>
+    res.status(status).json({ status, success: true, message, data }),
+  error: (res, message = 'Error', status = 400, data = null) =>
+    res.status(status).json({ status, success: false, message, data }),
 };

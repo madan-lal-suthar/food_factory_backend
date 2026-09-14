@@ -4,7 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const user_controller_1 = __importDefault(require("../controller/v1/user.controller"));
+const restaurants_routes_1 = __importDefault(require("../modules/restaurants/restaurants.routes"));
+const categories_routes_1 = __importDefault(require("../modules/categories/categories.routes"));
+const foods_routes_1 = __importDefault(require("../modules/foods/foods.routes"));
+const orders_routes_1 = __importDefault(require("../modules/orders/orders.routes"));
+const gallery_routes_1 = __importDefault(require("../modules/gallery/gallery.routes"));
+const reviews_routes_1 = __importDefault(require("../modules/reviews/reviews.routes"));
+const auth_routes_1 = __importDefault(require("../modules/auth/auth.routes"));
+const users_routes_1 = __importDefault(require("../modules/users/users.routes"));
 class Routes {
     router;
     constructor() {
@@ -12,29 +19,14 @@ class Routes {
         this.initializeRoutes();
     }
     initializeRoutes() {
-        //#region User API
-        this.router.route("/user/signUp").post(user_controller_1.default.userSignUp);
-        this.router.route("/public/user/getHomeBanner").post(user_controller_1.default.getHomeBanner);
-        this.router.route("/public/user/getTopHomefoods").post(user_controller_1.default.getTopHomefoods);
-        this.router.route("/public/user/getRestaurantTiming").post(user_controller_1.default.getRestaurantTiming);
-        this.router.route("/public/user/getFeedbackOfCustomer").post(user_controller_1.default.getFeedbackOfCustomer);
-        this.router.route("/public/user/getBestChefOfRestaurant").post(user_controller_1.default.getBestChefOfRestaurant);
-        //#endregion
-        //Menu API
-        // this.router.route("/public/menu/getMenuByCategory").post(UserController.getMenuByCategory);
-        // this.router.route("/public/menu/getMenuByFoods").post(UserController.getMenuByFoods);
-        // this.router.route("/public/menu/getFoodDetails").post(UserController.getFoodDetails);
-        // //Restaurant API
-        // this.router.route("/public/user/reservationOfTables").post(UserController.reservationOfTables);
-        // this.router.route("/public/user/createOrderOfFoods").post(UserController.createOrderOfFoods);
-        // this.router.route("/public/user/getOrderDetails").post(UserController.getOrderDetails);
-        // //gallery API
-        // this.router.route("/public/gallery/getGalleryImages").post(UserController.getGalleryImages);
-        // //blog API
-        // this.router.route("/public/blog/getAllBlogs").post(UserController.getAllBlogs);
-        // this.router.route("/public/blog/getBlogDetails").post(UserController.getBlogDetails);
-        // //about us API
-        // this.router.route("/public/aboutus/getAboutUs").post(UserController.getAboutUs);
+        this.router.use('/auth', auth_routes_1.default);
+        this.router.use('/users', users_routes_1.default);
+        this.router.use('/restaurants', restaurants_routes_1.default);
+        this.router.use('/categories', categories_routes_1.default);
+        this.router.use('/foods', foods_routes_1.default);
+        this.router.use('/orders', orders_routes_1.default);
+        this.router.use('/gallery', gallery_routes_1.default);
+        this.router.use('/reviews', reviews_routes_1.default);
     }
 }
 exports.default = new Routes().router;

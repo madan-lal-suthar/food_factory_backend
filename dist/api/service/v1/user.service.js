@@ -31,6 +31,22 @@ class UserService {
             throw new Error('Failed to login admin');
         }
     }
+    static async getUsers() {
+        const rows = await user_1.default.findAll({ where: { isDeleted: false } });
+        return rows;
+    }
+    static async getUserById(id) {
+        return user_1.default.findOne({ where: { id, isDeleted: false } });
+    }
+    static async createUser(payload) {
+        return user_1.default.create({
+            name: payload.name,
+            email: payload.email,
+            password: crypto_helper_1.default.encryptPassword(String(payload.password || '')),
+            userName: payload.userName || String(payload.email || ''),
+            profileLink: payload.profileLink || '',
+        });
+    }
     static async getHomeBanner(request, response) {
         try {
             const getBannerList = await banner_1.default.findAll({

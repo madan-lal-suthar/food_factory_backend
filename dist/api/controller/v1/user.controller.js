@@ -114,5 +114,32 @@ class UserController {
             return res.json({ status: 400, data: {}, message: localize_string_1.default.localize("FAILED", language) });
         }
     }
+    static async getUsers(req, res) {
+        try {
+            const users = await user_service_1.default.getUsers();
+            return res.json({ success: true, data: users });
+        }
+        catch (error) {
+            return res.status(500).json({ success: false, message: 'Failed to fetch users' });
+        }
+    }
+    static async getUserById(req, res) {
+        try {
+            const user = await user_service_1.default.getUserById(req.params.id);
+            return res.json({ success: true, data: user });
+        }
+        catch (error) {
+            return res.status(500).json({ success: false, message: 'Failed to fetch user' });
+        }
+    }
+    static async createUser(req, res) {
+        try {
+            const user = await user_service_1.default.createUser(req.body);
+            return res.status(201).json({ success: true, data: user });
+        }
+        catch (error) {
+            return res.status(400).json({ success: false, message: 'Failed to create user' });
+        }
+    }
 }
 exports.default = UserController;
