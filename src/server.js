@@ -3,6 +3,7 @@ const env = require('./config/env');
 const app = require('./app');
 const db = require('./database/models');
 const logger = require('./config/logger');
+const seedChefs = require('./modules/chefs/chef.seed');
 
 const server = http.createServer(app);
 
@@ -13,6 +14,9 @@ const server = http.createServer(app);
 
     await db.sequelize.sync({ alter: true });
     logger.info('Database synced');
+
+    await seedChefs();
+    logger.info('Chef seed data inserted');
 
     server.listen(env.PORT, () => {
       logger.info(`Server running on port ${env.PORT}`);

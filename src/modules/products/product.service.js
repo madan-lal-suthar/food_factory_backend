@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const Product = require('./product.model');
 
 class ProductService {
@@ -6,7 +7,23 @@ class ProductService {
     const limit = Number(query.limit || 10);
     const offset = (page - 1) * limit;
 
-    const products = await Product.findAll({ offset, limit });
+    const where = {};
+    const search = String(query.search || '').trim();
+
+    if (search) {
+      where[Op.or] = [
+        { name: { [Op.iLike]: `%${search}%` } },
+        { description: { [Op.iLike]: `%${search}%` } },
+      ];
+    }
+
+    const products = await Product.findAll({
+      where,
+      offset,
+      limit,
+      order: [['id', 'DESC']],
+    });
+
     return { products, page, limit };
   }
 

@@ -6,7 +6,7 @@ const { authRequired } = require('../../middlewares/auth.middleware');
 
 const router = express.Router();
 
-router.get('/', authRequired, productController.list);
+router.get('/', productController.list);
 router.post('/', authRequired, validate(productValidation.create), productController.create);
 
 module.exports = router;
