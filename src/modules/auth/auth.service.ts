@@ -3,13 +3,13 @@ const User = require('../users/user.model');
 const crypto = require('crypto');
 
 class AuthService {
-  async register(payload) {
+  async register(payload: Record<string, unknown>) {
     const user = await User.create(payload);
     const token = jwt.sign({ id: user.id, email: user.email });
     return { user, token };
   }
 
-  async login(payload) {
+  async login(payload: { email: string }) {
     const user = await User.findOne({ where: { email: payload.email } });
     if (!user) {
       throw new Error('Invalid credentials');
@@ -19,7 +19,7 @@ class AuthService {
     return { user, token };
   }
 
-  async guestLogin(req) {
+  async guestLogin(req: ExpressRequest) {
     const guestId = `guest_${crypto.randomUUID()}`;
     const accessToken = jwt.signGuest({ type: 'guest', guestId, session: crypto.randomUUID(), role: 'guest' }, '1h');
     const refreshToken = jwt.signGuest({ type: 'guest', guestId, session: crypto.randomUUID(), role: 'guest' }, '7d');

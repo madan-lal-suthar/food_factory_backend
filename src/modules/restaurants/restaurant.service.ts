@@ -2,13 +2,13 @@ const Restaurant = require('./restaurant.model');
 const { Op } = require('sequelize');
 
 class RestaurantService {
-  async getAll(query = {}) {
+  async getAll(query: ExpressQuery = {}) {
     const page = Number(query.page || 1);
     const limit = Number(query.limit || 12);
     const search = String(query.search || '');
     const offset = (page - 1) * limit;
 
-    const where = { isDeleted: false };
+    const where: Record<string, unknown> = { isDeleted: false };
     if (search) where.name = { [Op.iLike]: `%${search}%` };
 
     const data = await Restaurant.findAll({ where, limit, offset });
@@ -20,7 +20,7 @@ class RestaurantService {
     };
   }
 
-  async getById(id) {
+  async getById(id: string) {
     return Restaurant.findOne({ where: { id, isDeleted: false } });
   }
 }

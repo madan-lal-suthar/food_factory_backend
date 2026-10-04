@@ -2,12 +2,12 @@ const { Op } = require('sequelize');
 const Product = require('./product.model');
 
 class ProductService {
-  async list(query = {}) {
+  async list(query: ExpressQuery = {}) {
     const page = Number(query.page || 1);
     const limit = Number(query.limit || 10);
     const offset = (page - 1) * limit;
 
-    const where = {};
+    const where: Record<PropertyKey, unknown> = {};
     const search = String(query.search || '').trim();
 
     if (search) {
@@ -27,7 +27,7 @@ class ProductService {
     return { products, page, limit };
   }
 
-  async create(payload) {
+  async create(payload: Record<string, unknown>) {
     return Product.create(payload);
   }
 }

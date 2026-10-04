@@ -14,13 +14,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', routes);
 
-app.get('/health', (req, res) => {
+app.get('/health', (req: ExpressRequest, res: ExpressResponse) => {
   res.status(200).json({ success: true, message: 'ok' });
 });
 
-app.use((err, req, res, next) => {
+app.use((err: HttpError, req: ExpressRequest, res: ExpressResponse, next: ExpressNextFunction) => {
   logger.error(err.message || 'Unknown error');
   res.status(err.status || 500).json({ success: false, message: err.message || 'Internal server error' });
 });
 
-module.exports = app;
+export = app;

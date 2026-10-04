@@ -10,4 +10,4 @@ const db = {
   Chef,
 };
 
-module.exports = db;
+export = db;

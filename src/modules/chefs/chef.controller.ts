@@ -1,6 +1,6 @@
 const chefService = require('./chef.service');
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = async (req: ExpressRequest, res: ExpressResponse, next: ExpressNextFunction) => {
   try {
     const result = await chefService.getAll(req.query);
     res.status(200).json({
@@ -15,12 +15,12 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
-exports.getById = async (req, res, next) => {
+exports.getById = async (req: ExpressRequest, res: ExpressResponse, next: ExpressNextFunction) => {
   try {
     const result = await chefService.getById(req.params.id);
 
     if (!result) {
-      const error = new Error('Chef not found');
+      const error: HttpError = new Error('Chef not found');
       error.status = 404;
       return next(error);
     }

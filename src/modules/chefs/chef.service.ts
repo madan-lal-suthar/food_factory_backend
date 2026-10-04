@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const Chef = require('./chef.model');
 
 class ChefService {
-  async getAll(query = {}) {
+  async getAll(query: ExpressQuery = {}) {
     const page = Number(query.page || 1);
     const limit = Number(query.limit || 12);
     const offset = (page - 1) * limit;
@@ -10,7 +10,7 @@ class ChefService {
     const restaurant = String(query.restaurant || '').trim();
     const search = String(query.search || '').trim();
 
-    const where = {};
+    const where: Record<PropertyKey, unknown> = {};
 
     if (restaurant) {
       where.restaurant = { [Op.iLike]: restaurant };
@@ -40,7 +40,7 @@ class ChefService {
     };
   }
 
-  async getById(id) {
+  async getById(id: string) {
     return Chef.findByPk(id);
   }
 }

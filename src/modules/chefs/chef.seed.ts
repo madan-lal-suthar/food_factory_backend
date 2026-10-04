@@ -55,4 +55,4 @@ const seedChefs = async () => {
   }
 };
 
-module.exports = seedChefs;
+export = seedChefs;

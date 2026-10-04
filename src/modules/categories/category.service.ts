@@ -1,7 +1,7 @@
 const Category = require('./category.model');
 
 class CategoryService {
-  async getAll(query = {}) {
+  async getAll(query: ExpressQuery = {}) {
     const page = Number(query.page || 1);
     const limit = Number(query.limit || 12);
     const offset = (page - 1) * limit;
@@ -10,7 +10,7 @@ class CategoryService {
     return data;
   }
 
-  async getById(id) {
+  async getById(id: string) {
     return Category.findOne({ where: { id, isDeleted: false } });
   }
 }

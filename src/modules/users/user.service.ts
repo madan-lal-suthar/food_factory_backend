@@ -1,7 +1,7 @@
 const User = require('./user.model');
 
 class UserService {
-  async list(query = {}) {
+  async list(query: ExpressQuery = {}) {
     const page = Number(query.page || 1);
     const limit = Number(query.limit || 10);
 
@@ -10,7 +10,7 @@ class UserService {
     return { users, page, limit };
   }
 
-  async create(payload) {
+  async create(payload: Record<string, unknown>) {
     return User.create(payload);
   }
 }

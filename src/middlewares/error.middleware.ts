@@ -1,4 +1,4 @@
-module.exports = (err, req, res, next) => {
+module.exports = (err: HttpError, req: ExpressRequest, res: ExpressResponse, next: ExpressNextFunction) => {
   console.error(err);
   const status = err.status || 500;
   res.status(status).json({

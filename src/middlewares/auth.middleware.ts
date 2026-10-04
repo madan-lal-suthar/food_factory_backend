@@ -1,6 +1,6 @@
 const jwt = require('../utils/jwt');
 
-exports.authRequired = (req, res, next) => {
+exports.authRequired = (req: ExpressRequest, res: ExpressResponse, next: ExpressNextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(401).json({ status: 401, success: false, message: 'Unauthorized', data: null });

@@ -1,11 +1,8 @@
-const http = require('http');
 const env = require('./config/env');
 const app = require('./app');
 const db = require('./database/models');
 const logger = require('./config/logger');
 const seedChefs = require('./modules/chefs/chef.seed');
-
-const server = http.createServer(app);
 
 (async () => {
   try {
@@ -18,11 +15,11 @@ const server = http.createServer(app);
     await seedChefs();
     logger.info('Chef seed data inserted');
 
-    server.listen(env.PORT, () => {
+    app.listen(env.PORT, () => {
       logger.info(`Server running on port ${env.PORT}`);
     });
   } catch (error) {
-    logger.error(error.message);
+    logger.error(error instanceof Error ? error.message : String(error));
     process.exit(1);
   }
 })();
